@@ -1,0 +1,9 @@
+tqdm==4.59.0
+pandas==1.2.4
+scipy==1.6.2
+numpy==1.19.5
+natsort==7.1.1
+nibabel==3.2.1
+pydensecrf==1.0rc3
+SimpleITK==2.1.1
+visdom==0.1.8.9
