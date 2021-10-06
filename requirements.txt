@@ -1,3 +1,4 @@
+tensorflow
 tqdm==4.59.0
 pandas==1.2.4
 scipy==1.6.2
