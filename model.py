@@ -7,7 +7,7 @@ from tensorflow import keras
 from tensorflow.keras import layers
 
 
-def convolution_block_unet(input, num_filters):
+def encoder_block_unet(input, num_filters):
     x = layers.Conv2D(num_filters, 3, padding="same")(input)
     x = layers.MaxPool2D((2, 2))(x)
     # x = layers.BatchNormalization()(x)
@@ -15,23 +15,7 @@ def convolution_block_unet(input, num_filters):
     return x
 
 
-def convolution_block_kinet(input, num_filters):
-    x = layers.Conv2D(num_filters, 3, padding="same")(input)
-    x = layers.UpSampling2D(size=(2, 2), interpolation="bilinear")(x)
-    # x = layers.BatchNormalization()(x)
-    x = layers.Activation("relu")(x)
-    return x
-
-
-def encoder_block_unet(input, num_filters):
-    x = convolution_block_unet(input, num_filters)
-    # not sure abou this p
-    p = layers.MaxPool2D((2, 2))(x)
-    return x, p
-
-
 def encoder_block_kinet(input, num_filters):
-    # x = convolution_block_kinet(input, num_filters)
     x = layers.Conv2D(num_filters, 3, padding="same")(input)
     x = layers.UpSampling2D(size=(2, 2), interpolation="bilinear")(x)
     # x = layers.BatchNormalization()(x)
@@ -73,9 +57,6 @@ def kiunet(input_shape):
     s1, p1 = encoder_block_unet(inputs, 32)  # s1 to be used at end
     k1, j1 = encoder_block_kinet(inputs, 32)  # k1 to be used at end
 
-    # residual_p1 = convolution_block_kinet(p1, 32)
-    # residual_k1 = convolution_block_unet(j1, 32)
-
     u1 = crfb(s1, k1, 32, 0.25)
     o1 = crfb(k1, s1, 32, 4)
 
@@ -88,9 +69,6 @@ def kiunet(input_shape):
     s3, p3 = encoder_block_unet(s2, 128)
     k3, j3 = encoder_block_kinet(k2, 128)  # k3 to be used second to last
 
-    # residual_p3 = convolution_block_kinet(p3, 128)
-    # residual_k3 = convolution_block_unet(k3, 128)
-    #
     u3 = crfb(s3, k3, 128, 0.015625)
     o3 = crfb(k3, s2, 128, 32)
 
@@ -119,8 +97,8 @@ def kiunet(input_shape):
     out = layers.Activation("relu")(out)
 
     out = layers.Conv2D(1, 1, padding="same", activation="sigmoid")(out)
-    model = keras.Model(inputs, out, name="U-Net")
-    return model
+    kiunet_model = keras.Model(inputs, out, name="U-Net")
+    return kiunet_model
 
 
 # Free up RAM in case the model definition cells were run multiple times
