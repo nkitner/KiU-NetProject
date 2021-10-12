@@ -133,9 +133,8 @@ def kiunet(input_shape):
     d3_k = _decoder_block_kinet(out1, 16)  # KINET DECODER
 
     out = layers.Concatenate()([d3_u, d3_k])  # FINAL CONCATENATION OUTPUT FROM UNET AND KINET
-    out = layers.Activation("relu")(out)  # FINAL ACTIVATION
 
-    out = layers.Conv2D(1, 1, padding="same", activation="sigmoid")(out)  # FINAL CONVOLUTIONAL LAYER
+    out = layers.Conv2D(1, 1, padding="same", activation="relu")(out)  # FINAL CONVOLUTIONAL LAYER
     kiunet_model = keras.Model(inputs, out, name="U-Net")  # MODEL
 
     return kiunet_model
