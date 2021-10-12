@@ -41,3 +41,5 @@ NAME = "RITE_cnn-{}".format(int(time.time()))
 tensorboard = TensorBoard(log_dir='log/{}'.format(NAME))
 
 model.fit(............., callback=[tensorboard])
+
+# hihihi
