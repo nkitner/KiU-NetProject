@@ -9,6 +9,7 @@ from tensorflow import keras
 from tensorflow.keras import layers
 import numpy as np
 import time    # records the computation time
+import model as kiunet
 
 ### CONVERT TO STATIC GRAPH FOR TF.FUNCTION, REMOVES EAGER EXECUTION AND IMPROVES SPEED
 
@@ -25,6 +26,7 @@ val_acc_metric = keras.metrics.SparseCategoricalAccuracy()
 # Instantiate training loop
 epochs = 400
 batch_size = 1
+model = kiunet.kiunet((128, 128, 3))
 
 for epoch in range(epochs):
     print("\nStart of epoch %d" % (epoch,))

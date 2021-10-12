@@ -100,7 +100,6 @@ def kiunet(input_shape):
     kiunet_model = keras.Model(inputs, out, name="U-Net")
     return kiunet_model
 
-
 # Free up RAM in case the model definition cells were run multiple times
 keras.backend.clear_session()
 
