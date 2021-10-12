@@ -26,6 +26,7 @@ val_acc_metric = keras.metrics.SparseCategoricalAccuracy()
 # Instantiate training loop
 epochs = 400
 batch_size = 1
+# May need to change depending on dataset shape but should be ok
 model = kiunet.kiunet((128, 128, 3))
 
 for epoch in range(epochs):
