@@ -8,11 +8,14 @@ Date: 2021-10-07
 
 import tensorflow as tf
 
-def import_data:
+def import_data(path):
     '''Imports data from retina dataset
-    
     '''
+    for file in path:
+        #how do we import images into a tf tensor...?
 
+
+# fxn below should be removed I think #
 def make_input_fn(data_df, label_df, num_epochs=10, shuffle=True, batch_size=1):
     '''Generates an input_function instance
 
