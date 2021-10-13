@@ -7,31 +7,28 @@ Date: 2021-10-07
 '''
 
 import tensorflow as tf
+import os
+from PIL import Image
+
 
 def import_data(path):
-    '''Imports data from retina dataset
-    '''
-    for file in path:
-        #how do we import images into a tf tensor...?
+    """
+    Imports png images and returns as a list of tensors to be used in training
+    :param path: path to directory where images are
+    :return: list of Tensors
+    """
+    tensor_list = []
+    for file in os.listdir(path):
+        # Converts to RGB because the vessel images are black and white
+        png_img = Image.open(os.path.join(path, file)).convert('RGB')
+        # Encodes images as tensors and adds to the list
+        tensor_list.append(tf.io.encode_png(png_img))
+    # Returns list of tensors to be used in model
+    return tensor_list
 
 
-# fxn below should be removed I think #
-def make_input_fn(data_df, label_df, num_epochs=10, shuffle=True, batch_size=1):
-    '''Generates an input_function instance
+x_train = import_data("./training/images/processed_img")
+y_train = import_data("./training/av/processed_labels")
 
-    Args:
-        1) data_df(df): pandas dataframe holding input data
-        2) label_df(df): pandas dataframe holding ground truth labels for the input data
-        3) num_epochs(int): epochs to train for
-        4) shuffle(bool): toggles randomization of input data
-        5) batch_size(int): batch size
-    '''
-    def input_function():
-        ds = tf.data.Dataset.from_tensor_slices((dict(data_df, label_df)))
-        if shuffle:
-            ds = ds.shuffle(1000)
-        ds = ds.batch(batch_size).repeat(num_epochs)
-    return input_function
-
-train_input_fn = make_input_fn(dftrain, y_train)
-eval_input_fn = make_input_fn(dfeval, y_eval, num_epochs=1, shuffle=False)
+x_test = import_data("./testing/images/processed_img")
+y_test = import_data("./testing/av/processed_labels")
