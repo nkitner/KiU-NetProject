@@ -27,6 +27,7 @@ def import_data(path):
     return tensor_list
 
 
+# fxn below should be removed I think #
 def make_input_fn(data_df, label_df, num_epochs=10, shuffle=True, batch_size=1):
     '''Generates an input_function instance
 
