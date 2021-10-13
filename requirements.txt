@@ -1,3 +1,4 @@
+PIL
 tensorflow==2.6.0
 tqdm==4.59.0
 pandas==1.3.3
