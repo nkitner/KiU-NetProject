@@ -23,4 +23,5 @@ epochs=400,
 verbose='auto',
 callbacks=keras.callbacks.TensorBoard(log_dir="./logs"),    ## log metrics in TensorBoard
 validation_split=0.15,    ## uses 15% of training data as validation data
-shuffle=True)
+shuffle=True
+)
