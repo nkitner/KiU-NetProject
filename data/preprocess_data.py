@@ -53,7 +53,7 @@ for img in os.listdir("./training/images"):
     if img.endswith(".png") or img.endswith(".tif"):
         img = "./training/images/" + img
         new_img = resizeImg(img, (128, 128))
-        path = "./training/images/processed_labels/{}_img_downsampled.png".format(image_num)
+        path = "./training/images/processed_labels/{}_img_downsampled.tif".format(image_num)
         sitk.WriteImage(new_img, path)
         image_num += 1
 
@@ -75,6 +75,6 @@ for img in os.listdir("./testing/images"):
     if img.endswith(".png") or img.endswith(".tif"):
         img = "./testing/images/" + img
         new_img = resizeImg(img, (128, 128))
-        path = "./testing/images/processed_labels/{}_img_downsampled.png".format(image_num)
+        path = "./testing/images/processed_labels/{}_img_downsampled.tif".format(image_num)
         sitk.WriteImage(new_img, path)
         image_num += 1
