@@ -33,7 +33,14 @@ image_num = 1
 
 for img in "/training/av":
     new_img = resizeImg(img, (128, 128))
-    sitk.WriteImage(new_img, "/../processed")
+    sitk.WriteImage(new_img, "/processed_labels/{}_label_downsampled".format(image_num))
+    image_num += 1
+
+image_num = 1
+
+for img in "/training/images":
+    new_img = resizeImg(img, (128, 128))
+    sitk.WriteImage(new_img, "/processed_img/{}_img_downsampled".format(image_num))
     image_num += 1
 
 # Pre-process test dataset
@@ -41,5 +48,12 @@ image_num = 1
 
 for img in "/testing/av":
     new_img = resizeImg(img, (128, 128))
-    sitk.WriteImage(new_img, "/../processed")
+    sitk.WriteImage(new_img, "/processed_labels/{}_label_downsampled".format(image_num))
+    image_num += 1
+
+image_num = 1
+
+for img in "/testing/images":
+    new_img = resizeImg(img, (128, 128))
+    sitk.WriteImage(new_img, "/processed_img/img/{}_img_downsampled".format(image_num))
     image_num += 1

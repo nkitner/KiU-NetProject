@@ -10,10 +10,10 @@ from model.py import model as kiunet
 # insert import from data_processing #
 
 kiunet.compile(
-    optimizer=keras.optimizers.Adam(learning_rate=0.001),    ## learning_rate is different fro 3D
+    optimizer=keras.optimizers.Adam(learning_rate=0.001),    ## learning_rate is different from 3D
     loss=keras.losses.binary_crossentropy(from_logits=False),
-    metrics=[keras.metrics.F1Score(),
-    keras.metrics.MeanIoU(num_classes=)]    ## check keras metrics!!
+    metrics=[keras.metrics.F1Score(),    #check metric
+    keras.metrics.MeanIoU(num_classes=   #unknown
 )
 
 kiunet.fit(x=x_train,
@@ -21,6 +21,6 @@ y=y_train,
 batch_size=1,
 epochs=400,
 verbose='auto',
-callbacks=keras.callbacks.TensorBoard(log_dir="./logs"),
-validation_data=(x_val, y_val),
+callbacks=keras.callbacks.TensorBoard(log_dir="./logs"),    ## log metrics in TensorBoard
+validation_split=0.15,    ## uses 15% of training data as validation data
 shuffle=True)
