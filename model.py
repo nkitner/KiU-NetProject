@@ -143,10 +143,10 @@ def kiunet(input_shape):
 # Below code used for debugging
 
 # Free up RAM in case the model definition cells were run multiple times
-keras.backend.clear_session()
-
-# Build model
-img_size = (128, 128, 3)
-num_classes = 3
-model = kiunet(img_size)
-model.summary()
+# keras.backend.clear_session()
+#
+# # Build model
+# img_size = (128, 128, 3)
+# num_classes = 3
+# model = kiunet(img_size)
+# model.summary()
