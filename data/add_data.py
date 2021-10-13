@@ -27,13 +27,8 @@ def import_data(path):
     return tensor_list
 
 
-y_train = import_data("./training/av")
-# vessel_training_tensor = import_data("./training/vessel")
-x_train = import_data("./training/images")
+x_train = import_data("./training/images/processed_img")
+y_train = import_data("./training/av/processed_labels")
 
-x_test = import_data("./testing/av")
-# vessel_testing_tensor = import_data("./testing/vessel")
-y_test = import_data("./testing/images")
-
-# train_input_fn = make_input_fn(dftrain, y_train)
-# eval_input_fn = make_input_fn(dfeval, y_eval, num_epochs=1, shuffle=False)
+x_test = import_data("./testing/images/processed_img")
+y_test = import_data("./testing/av/processed_labels")
