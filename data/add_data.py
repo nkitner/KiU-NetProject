@@ -47,13 +47,13 @@ def make_input_fn(data_df, label_df, num_epochs=10, shuffle=True, batch_size=1):
     return input_function
 
 
-av_training_tensor = import_data("./training/av")
-vessel_training_tensor = import_data("./training/vessel")
-image_training_tensor = import_data("./training/images")
+y_train = import_data("./training/av")
+# vessel_training_tensor = import_data("./training/vessel")
+x_train = import_data("./training/images")
 
-av_testing_tensor = import_data("./testing/av")
-vessel_testing_tensor = import_data("./testing/vessel")
-image_testing_tensor = import_data("./testing/images")
+x_test = import_data("./testing/av")
+# vessel_testing_tensor = import_data("./testing/vessel")
+y_test = import_data("./testing/images")
 
 # train_input_fn = make_input_fn(dftrain, y_train)
 # eval_input_fn = make_input_fn(dfeval, y_eval, num_epochs=1, shuffle=False)
