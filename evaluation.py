@@ -1,7 +1,9 @@
+from datetime import time
+
 import tensorflow as tf
-from karas.metrics import MeanIoU
+from keras.metrics import MeanIoU
 from tensorflow.metrics import F1Score
-from karas.metrics import AUC
+from keras.metrics import AUC
 from tensorflow.keras.callbacks import TensorBoard
 
 # before starting:
@@ -15,6 +17,8 @@ from tensorflow.keras.callbacks import TensorBoard
 # num_class =
 
 # define mIOU
+from tensorflow.python.ops.metrics_impl import mean_iou
+
 mIOU = mean_iou(num_classes=num_class)
 # update mIOU
 mIOU.update_state(y_true, y_pred)
