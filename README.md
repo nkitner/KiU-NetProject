@@ -1,7 +1,5 @@
 # KiU-Net: Overcomplete Convolutional Architectures for Biomedical Image and Volumetric Segmentation
 
-This repository is a reproducibility project for [KiU-Net: Overcomplete Convolutional Architectures for Biomedical Image and Volumetric Segmentation](https://arxiv.org/abs/2030.12345). 
-
 This repository reflects our most up-to-date work in reproducing the paper [KiU-Net: Overcomplete Convolutional Architectures for Biomedical Image and Volumetric Segmentation](https://paperswithcode.com/paper/kiu-net-overcomplete-convolutional).
 
 This is not a finished product.
@@ -37,8 +35,3 @@ Our model achieves the following performance on :
 | My awesome model   |     85%         |      95%       |
 
 >📋  Include a table of results from your paper, and link back to the leaderboard for clarity and context. If your main result is a figure, include that figure and link to the command or notebook to reproduce it. 
-
-
-## Contributing
-
->📋  Pick a licence and describe how to contribute to your code repository. 
