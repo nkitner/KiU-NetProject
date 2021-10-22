@@ -7,15 +7,15 @@ Date: 2021-10-07
 import tensorflow as tf
 from tensorflow import keras
 from model import kiunet
-from .data.add_data import import_data_numpy
+from data.add_data import import_data_numpy
 
 kiunet_model = kiunet((128, 128, 3))
 
-x_train = import_data_numpy("data/resized/training/img")
-y_train = import_data_numpy("data/resized/training/labelcol")
+x_train = import_data_numpy("./data/resized/train/img")
+y_train = import_data_numpy("./data/resized/train/labelcol")
 
-x_test = import_data_numpy("data/resized/testing/img")
-y_test = import_data_numpy("data/resized/testing/labelcol")
+x_test = import_data_numpy("./data/resized/test/img")
+y_test = import_data_numpy("./data/resized/test/labelcol")
 
 kiunet_model.compile(
     optimizer=keras.optimizers.Adam(learning_rate=0.001),    ## learning_rate is different from 3D
