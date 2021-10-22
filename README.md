@@ -2,7 +2,7 @@
 
 This repository is for the reproducibility study of [KiU-Net: Overcomplete Convolutional Architectures forBiomedical Image and Volumetric Segmentation](https://arxiv.org/pdf/2010.01663v2.pdf). 
 
-This repository reflects our most up-to-date work in reproducing the paper KiU-Net: Overcomplete Convolutional Architectures for Biomedical Image and Volumetric Segmentation.
+This repository reflects our most up-to-date work in reproducing the paper.
 
 ## Prerequisites:
 - Python 3.7 and above*
