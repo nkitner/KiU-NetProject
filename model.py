@@ -87,11 +87,11 @@ def kiunet(input_shape):
     :param input_shape: Tuple of the shape of the input
     :return: keras.Model
     """
-    inputs = layers.Input(input_shape)
+    inputs = layers.Input(shape=input_shape)
 
     # ENCODER BLOCK #
 
-    s1 = _encoder_block_unet(inputs, 32)  # UNET ENCODER
+    s1 = _encoder_block_unet(inputs, 32)  # U NET ENCODER
     k1 = _encoder_block_kinet(inputs, 32)  # KINET ENCODER
 
     u1 = _crfb(s1, k1, 32, 0.25)  # CRFB U1 UNET
@@ -134,7 +134,7 @@ def kiunet(input_shape):
 
     out = layers.Concatenate()([d3_u, d3_k])  # FINAL CONCATENATION OUTPUT FROM UNET AND KINET
 
-    out = layers.Conv2D(1, 1, padding="same", activation="relu")(out)  # FINAL CONVOLUTIONAL LAYER
+    out = layers.Conv2D(3, 3, padding="same", activation="relu")(out)  # FINAL CONVOLUTIONAL LAYER
     kiunet_model = keras.Model(inputs, out, name="U-Net")  # MODEL
 
     return kiunet_model
@@ -143,10 +143,10 @@ def kiunet(input_shape):
 # Below code used for debugging
 
 # Free up RAM in case the model definition cells were run multiple times
-keras.backend.clear_session()
-
-# Build model
-img_size = (128, 128, 3)
-num_classes = 3
-model = kiunet(img_size)
-model.summary()
+# keras.backend.clear_session()
+#
+# # Build model
+# img_size = (128, 128, 3)
+# num_classes = 3
+# model = kiunet(img_size)
+# model.summary()
