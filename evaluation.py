@@ -1,8 +1,8 @@
 import tensorflow as tf
-from karas.metrics import MeanIoU
-from tensorflow.metrics import F1Score
-from karas.metrics import AUC
-from tensorflow.keras.callbacks import TensorBoard
+# from karas.metrics import MeanIoU
+# from tensorflow.metrics import F1Score
+# from karas.metrics import AUC
+# from tensorflow.keras.callbacks import TensorBoard
 
 # before starting:
 # 0a. predict testing images
@@ -41,5 +41,3 @@ NAME = "RITE_cnn-{}".format(int(time.time()))
 tensorboard = TensorBoard(log_dir='log/{}'.format(NAME))
 
 model.fit(............., callback=[tensorboard])
-
-# hihihi
