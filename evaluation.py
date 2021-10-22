@@ -1,9 +1,9 @@
 import tensorflow as tf
 from tensorflow import keras
+from data.add_data import import_data_numpy
 
-# before starting:
-# 0a. predict testing images
-# 0b. save newly predicted test images
-# 0c. read ground truth image
+x_test = import_data_numpy("./data/resized/test/img")
+y_test = import_data_numpy("./data/resized/test/labelcol")
 
-model.evaluate(x=x_test, y=y_test, verbose=1)
+reconstructed_model = keras.models.load_model("kiUnet_model_h5.h5")
+reconstructed_model.evaluate(x=x_test, y=y_test, verbose=1)
