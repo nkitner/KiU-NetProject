@@ -27,7 +27,7 @@ def _encoder_block_kinet(input, num_filters):
     """
     x = layers.Conv2D(num_filters, 3, padding="same")(input)
     x = layers.UpSampling2D(size=(2, 2), interpolation="bilinear")(x)
-    # x = layers.BatchNormalization()(x)
+    x = layers.BatchNormalization()(x)
     x = layers.Activation("relu")(x)
     p = layers.MaxPool2D((2, 2))(x)
     return x
@@ -56,7 +56,7 @@ def _decoder_block_kinet(input, num_filters):
     """
     x = layers.Conv2D(num_filters, 3, padding="same")(input)
     x = layers.MaxPool2D((2, 2))(x)
-    # x = layers.BatchNormalization()(x)
+    x = layers.BatchNormalization()(x)
     x = layers.Activation("relu")(x)
     print(type(x))
     return x
@@ -134,19 +134,39 @@ def kiunet(input_shape):
 
     out = layers.Concatenate()([d3_u, d3_k])  # FINAL CONCATENATION OUTPUT FROM UNET AND KINET
 
-    out = layers.Conv2D(3, 3, padding="same", activation="relu")(out)  # FINAL CONVOLUTIONAL LAYER
+    out = layers.Conv2D(1, 1, padding="valid", activation="relu")(out)  # FINAL CONVOLUTIONAL LAYER
     kiunet_model = keras.Model(inputs, out, name="U-Net")  # MODEL
 
     return kiunet_model
 
 
-# Below code used for debugging
+def unet(input_shape):
+    """
+    Architecture of the U-Net model
+    :param input_shape: Tuple of the shape of the input
+    :return: keras.Model
+    """
+    inputs = layers.Input(shape=input_shape)
+    print(input_shape)
+    # ENCODER BLOCK #
 
-# Free up RAM in case the model definition cells were run multiple times
-# keras.backend.clear_session()
-#
-# # Build model
-# img_size = (128, 128, 3)
-# num_classes = 3
-# model = kiunet(img_size)
-# model.summary()
+    s1 = _encoder_block_unet(inputs, 32)  # U NET ENCODER
+    s2 = _encoder_block_unet(s1, 64)  # UNET ENCODER
+    s3 = _encoder_block_unet(s2, 128)  # UNET ENCODER
+    s4 = _encoder_block_unet(s3, 256)  # UNET ENCODER
+    out = _encoder_block_unet(s4, 512)  # UNET ENCODER
+
+    # DECODER BLOCK #
+
+    out = _decoder_block_unet(out, 256)
+    out = layers.Concatenate()([out, s4])
+    out = _decoder_block_unet(out, 128)
+    out = layers.Concatenate()([out, s3])
+    out = _decoder_block_unet(out, 64)  # UNET DECODER
+    out = layers.Concatenate()([out, s2])  # CONCATENTATION D_U1 & S2 UNET
+    out = _decoder_block_unet(out, 32)  # UNET DECODER
+    out = layers.Concatenate()([out, s1])  # CONCATENATION D_U2 & S1 UNET
+    out = _decoder_block_unet(out, 1)  # UNET DECODER
+    unet_model = tf.keras.Model(inputs, out, name="U-Net")  # MODEL
+
+    return unet_model
