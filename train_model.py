@@ -9,7 +9,7 @@ from tensorflow import keras
 from model import kiunet
 from data.add_data import import_data_numpy
 
-kiunet_model = kiunet((128, 128, 3))
+kiunet_model = kiunet((128, 128, 3), 2)
 
 x_train = import_data_numpy("./data/resized/train/img")
 y_train = import_data_numpy("./data/resized/train/labelcol")
