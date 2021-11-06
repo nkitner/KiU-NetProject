@@ -77,7 +77,7 @@ def _crfb(x1, x2, num_filters, scale_factor):
     out = layers.Conv2D(num_filters, 3, padding="same")(x2)
     out = layers.Activation("relu")(out)
     out = tf.image.resize(out, [new_h, new_w])
-    output = layers.Concatenate()([x1, out])
+    output = layers.Add()([x1, out])
     return output
 
 
