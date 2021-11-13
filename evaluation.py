@@ -1,45 +1,26 @@
 import tensorflow as tf
-from karas.metrics import MeanIoU
-from tensorflow.metrics import F1Score
-from karas.metrics import AUC
 from tensorflow.keras.callbacks import TensorBoard
 
-# before starting:
-# 0a. predict testing images
-# 0b. save newly predicted test images
-# 0c. read ground truth image
-
-# y_true =
-# y_pred =
-# set the possible number of classes the prediction task can have
-# num_class =
-
-# define mIOU
-mIOU = mean_iou(num_classes=num_class)
-# update mIOU
-mIOU.update_state(y_true, y_pred)
-mIOU_result = mIOU.result()
-print('mIOU:', mIOU_result.numpy())
-
-# define F1 score
-dice = F1Score(num_classes=num_class)
-# update f1 socre
-dice.update_state(y_true, y_pred)
-dice_result = dice.result()
-print('F1 Score:', dice_result.numpy())
-
-# define auc
-auc = AUC(num_thresholds=200) #'num_thresholds' controls the degree of discretization with larger numbers of thresholds more closely approximating the true AUC. Defaults to 200.
-# update auc
-auc.update_state(y_true, y_pred)
-auc_result = auc.result()
-print('AUC:',auc_result.numpy())
+# Load saved models
+unet_reconstructed = keras.models.load_model('/content/unet_model_h5.h5')
+kiunet_reconstructed = keras.models.load_model('/content/kiUnet_model2_3d_a.h5')
 
 
-# Visualize evaluation of both training and testing using Tensorboard- Accuracy, Loss
-NAME = "RITE_cnn-{}".format(int(time.time()))
-tensorboard = TensorBoard(log_dir='log/{}'.format(NAME))
 
-model.fit(............., callback=[tensorboard])
+# Evaluate KiU-Net
+## Instantiate logging for tensorboard
+kiunet_eval_log_dir = "logs/kiunet/eval/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+kiunet_eval_tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=kiunet_eval_log_dir, histogram_freq=1)
 
-# hihihi
+kiunet_reconstructed.evaluate(x=x_test, y=y_test, batch_size=1,
+                              verbose=1,
+                              callbacks=[kiunet_eval_tensorboard_callback])
+
+# Evaluate U-Net
+## Instantiate logging for tensorboard
+unet_eval_log_dir = "logs/unet/eval/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+unet_eval_tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=unet_eval_log_dir, histogram_freq=1)
+
+unet_reconstructed.evaluate(x=x_test, y=y_test, batch_size=1,
+                              verbose=1,
+                              callbacks=[unet_eval_tensorboard_callback])
