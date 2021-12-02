@@ -176,6 +176,12 @@ def unet(input_shape, num_classes):
 
 
 def segnet(input_shape, num_classes):
+    """
+    Architecture of the Seg-Net model
+    :param num_classes:
+    :param input_shape: Tuple of the shape of the input
+    :return: keras.Model
+    """
     inputs = layers.Input(shape=input_shape)
     s0 = _encoder_block_unet(inputs, 16)
     s1 = _encoder_block_unet(s0, 32)
