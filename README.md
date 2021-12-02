@@ -54,7 +54,7 @@ python train_model.py kiu_net
 The models will be saved to a in a local subdirectory when training is completed.
 
 
-Alternatively, you may run the cells in the Jupyter notebook on your local machine.
+Alternatively, you may run the cells in the 'CISC867_KiUNet_Notebook.ipynb' notebook on your local machine.
 
 ## Evaluation
 
@@ -81,7 +81,7 @@ KiU-Net
 python evaluation.py evaluate_kiunet
 ```
 
-Alternatively, you may run the cells in the Jupyter notebook on your local machine.
+Alternatively, you may run the cells in the 'CISC867_KiUNet_Notebook.ipynb' notebook on your local machine.
 
 ## Results
 
