@@ -89,6 +89,9 @@ Our model achieves the following performance on :
 
 ### [Image Classification on RITE dataset](https://paperswithcode.com/sota/medical-image-segmentation-on-rite)
 
-| Model name         | Top 1 Accuracy  | Top 5 Accuracy |
+| Model name         | Dice | Jaccard |
 | ------------------ |---------------- | -------------- |
-| KiU-Net   |     TBD         |      TBD       |
+| Seg-Net   |     0.56012         |      0.4246       |
+| U-Net   |     0.7369         |      0.5404       |
+| KiU-Net   |     0.7886         |      0.5569       |
+
