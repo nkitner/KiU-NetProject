@@ -28,26 +28,60 @@ RITE Dataset - <a href = "https://drive.google.com/drive/folders/1WTPRJk8Q-Bx-uq
 
 ## Training
 
-To train the model(s) in the paper, run this command:
+To train all the models, run this command:
 
 ```train
-python train_model.py --input-data <path_to_data>
+python train_model.py all
 ```
 
-The model will be saved to a in a local subdirectory when training is completed.
+To train a specific model, run this command:
+
+Seg-Net
+```train
+python train_model.py seg_net
+```
+
+U-Net
+```train
+python train_model.py u_net
+```
+
+KiU-Net
+```train
+python train_model.py kiu_net
+```
+
+The models will be saved to a in a local subdirectory when training is completed.
 
 
-Alternatively, you may run the cells in the Jupyter notebook on your local machine.
+Alternatively, you may run the cells in the 'CISC867_KiUNet_Notebook.ipynb' notebook on your local machine.
 
 ## Evaluation
 
-To evaluate the model on the RITE dataset, run:
+To evaluate all models on the RITE dataset, run:
 
 ```eval
-python evaluation.py
+python evaluation.py evaluate_all
 ```
 
-Alternatively, you may run the cells in the Jupyter notebook on your local machine.
+To evaluate a specific model on the RITE dataset, run:
+
+Seg-Net
+```eval
+python evaluation.py evaluate_segnet
+```
+
+U-Net
+```eval
+python evaluation.py evaluate_unet
+```
+
+KiU-Net
+```eval
+python evaluation.py evaluate_kiunet
+```
+
+Alternatively, you may run the cells in the 'CISC867_KiUNet_Notebook.ipynb' notebook on your local machine.
 
 ## Results
 
@@ -55,6 +89,9 @@ Our model achieves the following performance on :
 
 ### [Image Classification on RITE dataset](https://paperswithcode.com/sota/medical-image-segmentation-on-rite)
 
-| Model name         | Top 1 Accuracy  | Top 5 Accuracy |
+| Model name         | Dice | Jaccard |
 | ------------------ |---------------- | -------------- |
-| KiU-Net   |     TBD         |      TBD       |
+| Seg-Net   |     0.56012         |      0.4246       |
+| U-Net   |     0.7369         |      0.5404       |
+| KiU-Net   |     0.7886         |      0.5569       |
+
