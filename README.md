@@ -31,10 +31,10 @@ RITE Dataset - <a href = "https://drive.google.com/drive/folders/1WTPRJk8Q-Bx-uq
 To train the model(s) in the paper, run this command:
 
 ```train
-python train_model.py --input-data <path_to_data>
+python train_model.py
 ```
 
-The model will be saved to a in a local subdirectory when training is completed.
+The models will be saved to a in a local subdirectory when training is completed.
 
 
 Alternatively, you may run the cells in the Jupyter notebook on your local machine.
