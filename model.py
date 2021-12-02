@@ -173,3 +173,21 @@ def unet(input_shape, num_classes):
     unet_model = tf.keras.Model(inputs, out, name="U-Net")  # MODEL
 
     return unet_model
+
+
+def segnet(input_shape, num_classes):
+    inputs = layers.Input(shape=input_shape)
+    s0 = _encoder_block_unet(inputs, 16)
+    s1 = _encoder_block_unet(s0, 32)
+    s2 = _encoder_block_unet(s1, 64)
+    s3 = _encoder_block_unet(s2, 128)
+    s4 = _encoder_block_unet(s3, 256)
+
+    out = _decoder_block_unet(s4, 128)
+    out = _decoder_block_unet(out, 64)
+    out = _decoder_block_unet(out, 32)
+    out = _decoder_block_unet(out, 16)
+    out = _decoder_block_unet(out, num_classes)
+    segnet_model = tf.keras.Model(inputs, out, name="SegNet")
+
+    return segnet_model
