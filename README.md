@@ -91,7 +91,7 @@ Our model achieves the following performance on :
 
 | Model name         | Dice | Jaccard |
 | ------------------ |---------------- | -------------- |
-| Seg-Net   |     0.56012         |      0.4246       |
+| Seg-Net   |     0.5612         |      0.4246       |
 | U-Net   |     0.7369         |      0.5404       |
 | KiU-Net   |     0.7886         |      0.5569       |
 
